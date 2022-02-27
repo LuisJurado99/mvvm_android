@@ -16,6 +16,12 @@ import java.lang.Exception
 class AdapterCharacterMain(private val context: Context) :
     RecyclerView.Adapter<AdapterCharacterMain.MainViewHolder>() {
     var characters = mutableListOf<Result>()
+
+    interface onClickAdapterCharacter {
+        fun clickCharacterAdapter(character: Result)
+    }
+
+
     fun insertItems(cartModels: MutableList<Result>) {
         val sizePrimer = characters.size
         characters.addAll(cartModels)
@@ -46,6 +52,11 @@ class AdapterCharacterMain(private val context: Context) :
         val imagePath = character.thumbnail.path
         val extension = character.thumbnail.extension
         val imageFinal = "$imagePath.$extension"
+
+        holder.itemView.setOnClickListener {
+            if(context is onClickAdapterCharacter)
+                context.clickCharacterAdapter(character)
+        }
         Picasso.Builder(context).build().load(imageFinal).into(holder.imageHero, object : Callback {
             override fun onSuccess() {
                 holder.progress.visibility = View.GONE

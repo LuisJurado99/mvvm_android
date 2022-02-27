@@ -4,9 +4,9 @@ import android.util.Log
 import developer.unam.practicocoppel.retrofit.RetrofitInstance
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.sql.Timestamp as Timestamp1
+import java.sql.Timestamp
 
-class MainRepository constructor(private val retrofitInstance: RetrofitInstance) {
+class FragmentMainRepository constructor(private val retrofitInstance: RetrofitInstance) {
     fun getCharacters(offset:Int=0,limit:Int=100)=retrofitInstance.getAllMovies(addParams(offset,limit))
 
     private fun createMd5(message: String): String {
@@ -33,7 +33,7 @@ class MainRepository constructor(private val retrofitInstance: RetrofitInstance)
     private fun addParams(offset: Int, limit: Int):HashMap<String,String>{
         val private = "435e550bd1e38ea6b922a2ae784a200caeb4613f"
         val public = "48d2901781db31818938d1517c19700b"
-        val ts = Timestamp1(System.currentTimeMillis())
+        val ts = Timestamp(System.currentTimeMillis())
 
         val map = hashMapOf<String,String>()
         map["apikey"] = public
