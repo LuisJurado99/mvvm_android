@@ -1,4 +1,4 @@
-package developer.unam.practicocoppel.fragment
+package developer.unam.practicocoppel.viewmodel
 
 import androidx.lifecycle.ViewModel
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import developer.unam.practicocoppel.R
+import developer.unam.practicocoppel.viewmodel.MainViewModelFragment
 
 class MainFragment : Fragment() {
 
