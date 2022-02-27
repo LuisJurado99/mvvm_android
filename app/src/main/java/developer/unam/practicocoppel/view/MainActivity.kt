@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import developer.unam.practicocoppel.adapter.AdapterCharacterMain
 import developer.unam.practicocoppel.databinding.ActivityMainBinding
 import developer.unam.practicocoppel.factory.MainViewModelFactory
@@ -23,12 +23,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
     private val retrofitInstance = RetrofitInstance.getInstance()
     private lateinit var adapter: AdapterCharacterMain
+    private var limit = 0
+    private var offset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var isScrolling =false
-        val layoutManager= GridLayoutManager(this,2)
+        var isScrolling = false
         binding = ActivityMainBinding.inflate(layoutInflater)
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         setContentView(binding.root)
         binding.rvMainActivity.layoutManager = layoutManager
         adapter = AdapterCharacterMain(this@MainActivity)
@@ -49,16 +51,24 @@ class MainActivity : AppCompatActivity() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val currentItems = layoutManager.childCount
-                val totalItems = layoutManager.itemCount
-                val scrollOutItems = layoutManager.findFirstVisibleItemPosition()
-                val totalItemsNow= currentItems + scrollOutItems
-                if (isScrolling && totalItemsNow == totalItems) {
-                    isScrolling = false
-                    viewModel.getAllMovies()
-                    Log.e("finalScroll","isFinalScroll")
+
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItems: IntArray? = layoutManager.findFirstVisibleItemPositions(null)
+                val pastVisibleItems =
+                    if (firstVisibleItems != null && firstVisibleItems.isNotEmpty()) {
+                        firstVisibleItems[0]
+                    } else 0
+
+                if (isScrolling) {
+                    if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+                        isScrolling = false
+                        offset += 100
+
+                        viewModel.getAllMovies(offset = offset)
+                    }
                 }
-                binding.fabUpdateScrollMainActivity.visibility = if (dy<5 && !isScrolling)
+                binding.fabUpdateScrollMainActivity.visibility = if (dy < 5 && !isScrolling)
                     View.GONE
                 else
                     View.VISIBLE
@@ -66,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         binding.fabUpdateScrollMainActivity.setOnClickListener {
+            binding.fabUpdateScrollMainActivity.visibility = View.GONE
             binding.rvMainActivity.scrollToPosition(0)
         }
         viewModel.movieList.observe(this, Observer {

@@ -2,13 +2,12 @@ package developer.unam.practicocoppel.repository
 
 import android.util.Log
 import developer.unam.practicocoppel.retrofit.RetrofitInstance
-import retrofit2.http.QueryMap
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.sql.Timestamp as Timestamp1
 
 class MainRepository constructor(private val retrofitInstance: RetrofitInstance) {
-    fun getCharacters()=retrofitInstance.getAllMovies(addParams())
+    fun getCharacters(offset:Int=0,limit:Int=100)=retrofitInstance.getAllMovies(addParams(offset,limit))
 
     private fun createMd5(message: String): String {
         val MD5 = "MD5"
@@ -31,7 +30,7 @@ class MainRepository constructor(private val retrofitInstance: RetrofitInstance)
         return ""
     }
 
-    private fun addParams():HashMap<String,String>{
+    private fun addParams(offset: Int, limit: Int):HashMap<String,String>{
         val private = "435e550bd1e38ea6b922a2ae784a200caeb4613f"
         val public = "48d2901781db31818938d1517c19700b"
         val ts = Timestamp1(System.currentTimeMillis())
@@ -40,6 +39,8 @@ class MainRepository constructor(private val retrofitInstance: RetrofitInstance)
         map["apikey"] = public
         map["ts"] = ts.toString()
         map["hash"] = createMd5("$ts$private$public")
+        map["offset"] = offset.toString()
+        map["limit"] = limit.toString()
         Log.e("params", "params $map")
         return  map
     }

@@ -13,8 +13,8 @@ class MainViewModel constructor(private val repository: MainRepository) : ViewMo
     val movieList = MutableLiveData<Characters>()
     val errorMessage = MutableLiveData<String>()
 
-    fun getAllMovies() {
-        val response = repository.getCharacters()
+    fun getAllMovies(offset:Int=0,limit:Int=0) {
+        val response = repository.getCharacters(offset = offset)
         response.enqueue(object : Callback<Characters> {
             override fun onResponse(call: Call<Characters>, response: Response<Characters>) {
                 movieList.postValue(response.body())

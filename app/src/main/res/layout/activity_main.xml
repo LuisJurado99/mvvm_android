@@ -10,7 +10,7 @@
             android:id="@+id/rvMainActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             tools:listitem="@layout/adapter_movie" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabUpdateScrollMainActivity"

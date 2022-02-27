@@ -3,6 +3,7 @@ package developer.unam.practicocoppel.adapter
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
@@ -26,6 +27,7 @@ class AdapterCharacterMain(private val context: Context) :
         RecyclerView.ViewHolder(bindingAdapter.root) {
         val imageHero = bindingAdapter.ivAdapterHeroes
         val tvHero = bindingAdapter.tvAdapterName
+        val progress = bindingAdapter.pbAdapterMovie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder =
@@ -44,7 +46,15 @@ class AdapterCharacterMain(private val context: Context) :
         val imagePath = character.thumbnail.path
         val extension = character.thumbnail.extension
         val imageFinal = "$imagePath.$extension"
-        Picasso.Builder(context).build().load(imageFinal).into(holder.imageHero)
+        Picasso.Builder(context).build().load(imageFinal).into(holder.imageHero, object : Callback {
+            override fun onSuccess() {
+                holder.progress.visibility = View.GONE
+            }
+
+            override fun onError(e: Exception?) {
+                holder.progress.visibility = View.GONE
+            }
+        })
     }
 
     override fun getItemCount(): Int = characters.size
