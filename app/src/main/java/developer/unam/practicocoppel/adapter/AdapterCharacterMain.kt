@@ -49,8 +49,8 @@ class AdapterCharacterMain(private val context: Context) :
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val character = characters[position]
         holder.tvHero.text = character.name
-        val imagePath = character.thumbnail.path
-        val extension = character.thumbnail.extension
+        val imagePath = character.thumbnail?.path
+        val extension = character.thumbnail?.extension
         val imageFinal = "$imagePath.$extension"
 
         holder.itemView.setOnClickListener {

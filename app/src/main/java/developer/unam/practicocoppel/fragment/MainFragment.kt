@@ -11,6 +11,8 @@ import android.widget.AbsListView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import developer.unam.practicocoppel.adapter.AdapterCharacterMain
@@ -104,7 +106,7 @@ class MainFragment : Fragment(),AdapterCharacterMain.onClickAdapterCharacter {
     }
 
     override fun clickCharacterAdapter(character: Result) {
-        //findNavController().navigate(MainFragment)
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailsHeroFragment(character))
     }
 
 }

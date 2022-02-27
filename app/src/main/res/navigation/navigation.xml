@@ -14,10 +14,14 @@
             android:id="@+id/action_mainFragment_to_detailsHeroFragment"
             app:destination="@id/detailsHeroFragment" />
 
+
     </fragment>
     <fragment
         android:id="@+id/detailsHeroFragment"
         android:name="developer.unam.practicocoppel.fragment.DetailsHeroFragment"
         android:label="details_hero_fragment"
-        tools:layout="@layout/details_hero_fragment" />
+        tools:layout="@layout/details_hero_fragment">
+        <argument app:argType="developer.unam.practicocoppel.retrofit.character.Result"
+            android:name="character"/>
+    </fragment>
 </navigation>
