@@ -26,4 +26,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        mNavController.popBackStack()
+        return super.onSupportNavigateUp()
+    }
+
 }

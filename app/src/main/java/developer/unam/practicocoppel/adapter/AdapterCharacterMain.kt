@@ -13,7 +13,7 @@ import developer.unam.practicocoppel.retrofit.character.Characters
 import developer.unam.practicocoppel.retrofit.character.Result
 import java.lang.Exception
 
-class AdapterCharacterMain(private val context: Context) :
+class AdapterCharacterMain(private val context: onClickAdapterCharacter?) :
     RecyclerView.Adapter<AdapterCharacterMain.MainViewHolder>() {
     var characters = mutableListOf<Result>()
 
@@ -56,8 +56,10 @@ class AdapterCharacterMain(private val context: Context) :
         holder.itemView.setOnClickListener {
             if(context is onClickAdapterCharacter)
                 context.clickCharacterAdapter(character)
+            else
+                Log.e("adapterC","adapterClick")
         }
-        Picasso.Builder(context).build().load(imageFinal).into(holder.imageHero, object : Callback {
+        Picasso.Builder(holder.itemView.context).build().load(imageFinal).into(holder.imageHero, object : Callback {
             override fun onSuccess() {
                 holder.progress.visibility = View.GONE
             }

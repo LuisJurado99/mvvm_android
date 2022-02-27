@@ -47,11 +47,12 @@ class MainFragment : Fragment(),AdapterCharacterMain.onClickAdapterCharacter {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,MainViewFactory(FragmentMainRepository(RetrofitInstance.getInstance())))[MainViewModelFragment::class.java]
+        activity?.actionBar?.title = "Home"
         var isScrolling = false
         var offset =0
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.rvMainActivity.layoutManager = layoutManager
-        val adapter = AdapterCharacterMain(requireContext())
+        val adapter = AdapterCharacterMain(this)
         binding.rvMainActivity.adapter = adapter
 
         binding.rvMainActivity.addOnScrollListener(object :
@@ -106,6 +107,7 @@ class MainFragment : Fragment(),AdapterCharacterMain.onClickAdapterCharacter {
     }
 
     override fun clickCharacterAdapter(character: Result) {
+        Log.e("direciton","character")
         findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailsHeroFragment(character))
     }
 

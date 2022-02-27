@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import developer.unam.practicocoppel.R
 import developer.unam.practicocoppel.databinding.DetailsHeroFragmentBinding
@@ -33,7 +34,10 @@ class DetailsHeroFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailsHeroViewModel::class.java)
-
+        val support = activity as AppCompatActivity
+        support.supportActionBar?.title = args.character.name.toString()
+        
     }
+
 
 }

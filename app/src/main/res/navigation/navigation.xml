@@ -8,10 +8,12 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="developer.unam.practicocoppel.fragment.MainFragment"
-        android:label="main_fragment"
+        android:label="Home"
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_detailsHeroFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
             app:destination="@id/detailsHeroFragment" />
 
 
