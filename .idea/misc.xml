@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/adapter_hero_generic.xml" value="0.41545012165450124" />
         <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/adapter_movie.xml" value="0.35625" />
         <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/details_hero_fragment.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/details_hero_inc_fragment.xml" value="0.15677083333333333" />
         <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/main_fragment.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/luisj/AndroidStudioProjects/PracticoCoppel/app/src/main/res/layout/repeat_item_inc_character.xml" value="0.22" />
       </map>
     </option>
   </component>

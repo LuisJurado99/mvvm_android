@@ -7,13 +7,13 @@ data class Events(
     val available: String?,
     val collectionURI: String?,
     val items: List<Item>?,
-    val returned: String?
+    val returned: Int
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.createTypedArrayList(Item),
-        parcel.readString()
+        parcel.readInt()
     ) {
     }
 
@@ -21,7 +21,7 @@ data class Events(
         parcel.writeString(available)
         parcel.writeString(collectionURI)
         parcel.writeTypedList(items)
-        parcel.writeString(returned)
+        parcel.writeInt(returned)
     }
 
     override fun describeContents(): Int {
