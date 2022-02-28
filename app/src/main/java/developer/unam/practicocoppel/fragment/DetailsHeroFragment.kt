@@ -1,6 +1,5 @@
 package developer.unam.practicocoppel.fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,8 +15,6 @@ import developer.unam.practicocoppel.adapter.AdapterGenericDetails
 import developer.unam.practicocoppel.databinding.DetailsHeroFragmentBinding
 import developer.unam.practicocoppel.databinding.RepeatItemIncCharacterBinding
 import developer.unam.practicocoppel.retrofit.character.Item
-import developer.unam.practicocoppel.retrofit.character.Result
-import developer.unam.practicocoppel.viewmodel.DetailsHeroViewModel
 
 class DetailsHeroFragment : Fragment() {
     private var _binding: DetailsHeroFragmentBinding? = null
@@ -28,7 +25,6 @@ class DetailsHeroFragment : Fragment() {
         fun newInstance() = DetailsHeroFragment()
     }
 
-    private lateinit var viewModel: DetailsHeroViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +37,6 @@ class DetailsHeroFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailsHeroViewModel::class.java)
         val support = activity as AppCompatActivity
         support.supportActionBar?.title = args.character.name.toString()
         binding.incFragment.tvIncDescription.text = args.character.description
@@ -91,6 +86,12 @@ class DetailsHeroFragment : Fragment() {
         } else {
             binding.incSeries.root.visibility = View.GONE
         }
+
+        if (binding.incComic.root.visibility == View.GONE &&
+            binding.incEvents.root.visibility == View.GONE &&
+            binding.incSeries.root.visibility == View.GONE &&
+            binding.incStories.root.visibility == View.GONE)
+            binding.mcvNotElementShow.visibility = View.VISIBLE
 
     }
 

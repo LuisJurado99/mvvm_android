@@ -14,6 +14,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvNotElementShow"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_margin="@dimen/margin_generic_views"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_block"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="@dimen/margin_generic_views"
+            android:layout_width="wrap_content"
+            android:text="@string/items_to_show"
+            android:layout_gravity="center|bottom"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
